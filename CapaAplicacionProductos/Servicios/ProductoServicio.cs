@@ -11,9 +11,9 @@ namespace CapaAplicacionProductos.Servicios
 {
     public interface IProductoService
     {
-        ProductoDto createProducto(ProductoDto productoDto);
+        Producto createProducto(ProductoDto productoDto);
         List<ProductoDto> BusquedaProducto(int precio);
-        Producto EliminarProducto(ProductoDto producto);
+        bool EliminarProducto(int productoID);
         List<ProductoDto> GetAllProducto();
 
     }
@@ -36,7 +36,7 @@ namespace CapaAplicacionProductos.Servicios
             return _Query.BusquedaProducto(precio);
         }
 
-        public ProductoDto createProducto(ProductoDto productoDto)
+        public Producto createProducto(ProductoDto productoDto)
         {
 
             var entity = new Producto()
@@ -53,37 +53,17 @@ namespace CapaAplicacionProductos.Servicios
             };
 
             repository.Agregar<Producto>(entity);
-            return new ProductoDto {
-                Nombre = entity.Nombre ,
-                Descripcion = entity.Descripcion,
-                PrecioID= entity.PrecioID,
-                ImagenID = entity.ImagenID ,
-                CategoriaID = entity.CategoriaID,
-                MarcaID = entity.MarcaID,
-                Stock = entity.Stock
-
-            };
+            return entity;
 
 
 
         }
 
-        public Producto EliminarProducto(ProductoDto producto)
+        public bool EliminarProducto(int productoID)
         {
-            var entity = new Producto()
-            {
-                
-                CategoriaID = producto.CategoriaID,
-                Nombre = producto.Nombre ,
-                Descripcion = producto.Descripcion,
-                PrecioID = producto.PrecioID,
-                ImagenID = producto.ImagenID,
-                MarcaID =  producto.MarcaID,
-                Stock = producto.Stock
-                
-            };
-            repository.Delete<Producto>(entity);
-            return entity;
+
+            return repository.DeleteById<Producto>(productoID);
+             
         }
 
         public List<ProductoDto> GetAllProducto()

@@ -1,4 +1,5 @@
 ﻿using CapaDominioProductos.DTOs;
+using CapaDominioProductos.Entidades;
 using CapaDominioProductos.Querys;
 using SqlKata.Compilers;
 using SqlKata.Execution;
@@ -28,17 +29,19 @@ namespace CapaAccesoDatosProductos.Querys
             var result = query.Get<ProductoDto>();
             return result.ToList();
         }
+
         public List<ProductoDto> BusquedaProducto(int precio)
         {
             var db = new QueryFactory(connection, compiler);
+            var Precio = db.Query("PrecioProducto").Select("PrecioproductoID").Where("Precioventa", "=", precio).FirstOrDefault<PrecioProducto>();
             var query = db.Query("Productos").Select("Nombre"
                 , "Descripcion"
                 , "PrecioID"
                 , "ImagenID"
                 , "CategoriaID")
-                .Where("PrecioID", "=", precio);
-            var result = query.Get<ProductoDto>().ToList();
-            return result;
+                .Where("PrecioID", "=", Precio.Id).Get<ProductoDto>().ToList();
+
+            return query;
         }
     }
 }

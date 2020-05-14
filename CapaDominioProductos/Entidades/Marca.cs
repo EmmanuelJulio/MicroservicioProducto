@@ -5,13 +5,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CapaDominioProductos.Entidades
 {
-   public  class Marca
+   public  class Marca : Entidad
     {
-        [Key]
-        private int marcaID;
+       
         private string nombre;
 
-        public int MarcaID { get => marcaID; set => marcaID = value; }
+       
         public string Nombre { get => nombre; set => nombre = value; }
     }
 }

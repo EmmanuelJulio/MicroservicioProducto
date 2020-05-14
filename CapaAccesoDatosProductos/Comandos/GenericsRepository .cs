@@ -1,7 +1,10 @@
 ﻿using CapaDominioProductos.Comandos;
+using CapaDominioProductos.Entidades;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
 namespace CapaAccesoDatosProductos.Comandos
@@ -25,6 +28,21 @@ namespace CapaAccesoDatosProductos.Comandos
         {
             contexto.Set<T>().Remove(entity);
             contexto.SaveChanges();
+        }
+
+        public bool DeleteById<T>(int id) where T : Entidad
+        {
+            try
+            {
+               var obejto= contexto.Set<T>().FirstOrDefault(x => x.Id == id);
+                contexto.Remove<T>(obejto);
+                contexto.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public T GetBy<T>(int id) where T : class

@@ -5,11 +5,10 @@ using System.Text;
 
 namespace CapaDominioProductos.Entidades
 {
-    public class Producto
+    public class Producto : Entidad
     {
 
-        [Key]
-        private int productoID;
+        
         private string nombre;
         private string descripcion;
         private int precioID;
@@ -18,7 +17,7 @@ namespace CapaDominioProductos.Entidades
         private int marcaID;
         private int stock;
 
-        public int ProductoID { get => productoID; set => productoID = value; }
+       
         public string Nombre { get => nombre; set => nombre = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public int PrecioID { get => precioID; set => precioID = value; }

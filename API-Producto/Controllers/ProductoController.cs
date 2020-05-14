@@ -21,9 +21,9 @@ namespace API_Producto.Controllers
         {
             this.servicio = servicio;
         }
-
-        [HttpPost("Post")]
-        public IActionResult Post([FromQuery] ProductoDto productoDto)
+        [Route ("IncertarProducto")]
+        [HttpPost]
+        public IActionResult Post(ProductoDto productoDto)
         {
             try
             {
@@ -36,9 +36,9 @@ namespace API_Producto.Controllers
             }        
         }
 
-        //busca un producto por su precio
+       [Route("FiltroPrecio")]
         [HttpGet]
-        public IActionResult GETSearchPrice([FromQuery] int precio)
+        public IActionResult GETSearchPrice(int precio)
         {
             try
             {
@@ -52,9 +52,9 @@ namespace API_Producto.Controllers
             }
         }
 
-        //devuelve una lista de productos
-
-        [HttpGet("GetProducts")]
+        
+        [Route("TraerProductos")]
+        [HttpGet]
         public IActionResult GetProducts()
         {
             try
@@ -68,12 +68,13 @@ namespace API_Producto.Controllers
 
             }
         }
-        [HttpDelete("DeleteProducto")]
-        public IActionResult DeleteProducto(ProductoDto producto)
+        [Route("BorrarProducto")]
+        [HttpDelete]
+        public IActionResult DeleteProducto(int id)
         {
             try
             {
-                return new JsonResult(servicio.EliminarProducto(producto)) { StatusCode = 200 };
+                return new JsonResult(servicio.EliminarProducto(id)) { StatusCode = 200 };
 
             }
             catch (System.Exception e)
