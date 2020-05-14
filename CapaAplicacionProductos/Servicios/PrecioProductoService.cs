@@ -13,9 +13,9 @@ namespace CapaAplicacionProductos.Servicios
     }
     public class PrecioProductoService : IPrecioProductoService
     {
-        private readonly IGenericsRepository repository;
+        private readonly IGenericsRepository<Entidad> repository;
 
-        public PrecioProductoService(IGenericsRepository repository)
+        public PrecioProductoService(IGenericsRepository<Entidad> repository)
         {
             this.repository = repository;
         }
@@ -29,7 +29,7 @@ namespace CapaAplicacionProductos.Servicios
                 Fecha = DateTime.Now
                 
             };
-            repository.Agregar<PrecioProducto>(entity);
+            repository.Agregar(entity);
             return new PrecioProductoDto { 
             Precioreal = entity.Precioreal,
             Precioventa = entity.Precioventa,

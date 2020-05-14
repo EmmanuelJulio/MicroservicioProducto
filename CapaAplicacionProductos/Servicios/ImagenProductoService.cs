@@ -13,9 +13,9 @@ namespace CapaAplicacionProductos.Servicios
     }
     public class ImagenProductoService : IimagenProductoService
     {
-        private readonly IGenericsRepository repository;
+        private readonly IGenericsRepository<Entidad> repository;
 
-        public ImagenProductoService(IGenericsRepository repository)
+        public ImagenProductoService(IGenericsRepository<Entidad> repository)
         {
             this.repository = repository;
         }
@@ -26,7 +26,7 @@ namespace CapaAplicacionProductos.Servicios
             {
                 Nombre = nombre +".jpg" 
             };
-             repository.Agregarr<ImagenProducto>(entity);
+             repository.Agregarr(entity);
             return new ImagenProductoDto
             {
                 Nombre= nombre + ".jpg"

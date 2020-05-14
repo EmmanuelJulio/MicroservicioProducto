@@ -43,5 +43,12 @@ namespace CapaAccesoDatosProductos.Querys
 
             return query;
         }
+
+        public Producto BusquedaProductoByID(int id)
+        {
+            var db = new QueryFactory(connection, compiler);
+            var producto = db.Query("Productos").Select("id", "Nombre", "Descripcion", "PrecioID", "MarcaID").Where("id", "=", id).FirstOrDefault<Producto>();
+            return producto;
+        }
     }
 }

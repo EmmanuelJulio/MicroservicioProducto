@@ -8,6 +8,7 @@ using CapaAccesoDatosProductos.Comandos;
 using CapaAccesoDatosProductos.Querys;
 using CapaAplicacionProductos.Servicios;
 using CapaDominioProductos.Comandos;
+using CapaDominioProductos.Entidades;
 using CapaDominioProductos.Querys;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,7 +47,7 @@ namespace API_Producto
             {
                 return new SqlConnection(connectionString);
             });
-            services.AddTransient<IGenericsRepository, GenericsRepository>();
+            services.AddTransient<IGenericsRepository<Entidad>, GenericsRepository<Entidad>>();
             services.AddTransient<IProductoService, ProductoServicio>();
             services.AddTransient<IPrecioProductoService, PrecioProductoService>();
             services.AddTransient<IMarcaService, MarcaService>();

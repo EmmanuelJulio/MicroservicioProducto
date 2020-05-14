@@ -5,12 +5,12 @@ using System.Text;
 
 namespace CapaDominioProductos.Comandos
 {
-    public interface IGenericsRepository
+    public interface IGenericsRepository<T>
     {
-        void Agregar<T>(T entity) where T : class;
-        T Agregarr<T>(T entity) where T : class;
-        T GetBy<T>(int id) where T : class;
-        void Delete<T>(T entity) where T : class;
-        bool DeleteById<T>(int productoID) where T : Entidad;
+        void Agregar(T entity);
+        T Agregarr(T entity);
+        T GetBy(int id) ;
+        void Delete(T entity);
+        bool DeleteById(int productoID);
     }
 }

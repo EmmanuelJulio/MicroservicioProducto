@@ -21,10 +21,10 @@ namespace CapaAplicacionProductos.Servicios
     {
 
 
-        private readonly IGenericsRepository repository;
+        private readonly IGenericsRepository<Entidad> repository;
         private readonly IProductoQuery _Query;
 
-        public ProductoServicio(IGenericsRepository repository,IProductoQuery query)
+        public ProductoServicio(IGenericsRepository<Entidad> repository,IProductoQuery query)
         {
             this.repository = repository;
             _Query = query;
@@ -52,7 +52,7 @@ namespace CapaAplicacionProductos.Servicios
 
             };
 
-            repository.Agregar<Producto>(entity);
+            repository.Agregar(entity);
             return entity;
 
 
@@ -62,7 +62,7 @@ namespace CapaAplicacionProductos.Servicios
         public bool EliminarProducto(int productoID)
         {
 
-            return repository.DeleteById<Producto>(productoID);
+            return repository.DeleteById(productoID);
              
         }
 

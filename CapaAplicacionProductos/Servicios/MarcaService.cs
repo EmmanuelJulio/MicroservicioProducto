@@ -13,9 +13,9 @@ namespace CapaAplicacionProductos.Servicios
     }
     public class MarcaService :IMarcaService
     {
-        private readonly IGenericsRepository repository;
+        private readonly IGenericsRepository<Entidad> repository;
 
-        public MarcaService(IGenericsRepository repository)
+        public MarcaService(IGenericsRepository<Entidad> repository)
         {
             this.repository = repository;
         }
@@ -26,7 +26,7 @@ namespace CapaAplicacionProductos.Servicios
             {
                 Nombre = Marca.Nombre
             };
-            repository.Agregar<Marca>(oMarca);
+            repository.Agregar(oMarca);
             return oMarca;
         }
     }

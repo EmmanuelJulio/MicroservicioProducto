@@ -1,43 +1,67 @@
-﻿using CapaDominioProductos.Comandos;
+﻿using CapaAccesoDatosProductos.Querys;
+using CapaDominioProductos.Comandos;
 using CapaDominioProductos.Entidades;
 using Microsoft.EntityFrameworkCore;
+using SqlKata.Compilers;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
 namespace CapaAccesoDatosProductos.Comandos
 {
-    public class GenericsRepository : IGenericsRepository
+    public class GenericsRepository<T> : IGenericsRepository<T> where T : Entidad, new()
     {
+        private readonly IDbConnection connection;
+        private readonly Compiler compiler;
         private readonly Contexto contexto;
-        public GenericsRepository(Contexto contexto)
+
+        public GenericsRepository(IDbConnection connection, Compiler compiler, Contexto contexto)
         {
+            this.connection = connection;
+            this.compiler = compiler;
             this.contexto = contexto;
         }
 
-        public void Agregar<T>(T entity) where T : class
+        public void Agregar(T entity) 
         {
             contexto.Add(entity);
             contexto.SaveChanges();
         }
-      
 
-        public void Delete<T>(T entity) where T : class
+        public T1 Agregarr<T1>(T1 entity) where T1 : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(T entity) 
         {
             contexto.Set<T>().Remove(entity);
             contexto.SaveChanges();
         }
 
-        public bool DeleteById<T>(int id) where T : Entidad
+        public bool DeleteById(int id) 
         {
             try
             {
-              Producto entidad = contexto.productos.FirstOrDefault(x => x.Id == id);
-                contexto.productos.Remove(entidad);
-                    contexto.SaveChanges();
+                //using (contexto)
+                //{
+                //    Producto p = contexto.productos.Find(id);
+                //    contexto.productos.Remove(p);
+
+                //}
+                var Entidad = contexto.Set<T>().FirstOrDefault(x => x.Id == id);
+                ////var entidad = new T() { Id = id };
+                contexto.Entry(Entidad).State = EntityState.Deleted;
+                contexto.SaveChanges();
+                //ProductoQuery query = new ProductoQuery(connection, compiler);
+               // Producto p = query.BusquedaProductoByID(id);
+               // contexto.productos.Remove(p);
                 
+
+
                 return true;
             }
             catch (Exception)
@@ -47,17 +71,19 @@ namespace CapaAccesoDatosProductos.Comandos
         }
 
 
-        public T GetBy<T>(int id) where T : class
+        public T GetBy(int id) 
         {
             DbSet<T> table = contexto.Set<T>();
             return table.Find(id);
         }
 
-        T IGenericsRepository.Agregarr<T>(T entity)
+       
+
+        T IGenericsRepository<T>.Agregarr(T entity)
         {
             contexto.Add(entity);
             contexto.SaveChanges();
-            return entity;
+            return entity; ;
         }
     }
 }

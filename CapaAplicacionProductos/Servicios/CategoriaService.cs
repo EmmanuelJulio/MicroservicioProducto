@@ -14,9 +14,9 @@ namespace CapaAplicacionProductos.Servicios
     }
     public class CategoriaService :ICategoriaService
     {
-        private readonly IGenericsRepository repository;
+        private readonly IGenericsRepository<Entidad> repository;
 
-        public CategoriaService(IGenericsRepository repository)
+        public CategoriaService(IGenericsRepository<Entidad> repository)
         {
             this.repository = repository;
         }
@@ -28,7 +28,7 @@ namespace CapaAplicacionProductos.Servicios
                 Descripcion = descripcion
                 
             };
-            repository.Agregar<Categoria>(entity);
+            repository.Agregar(entity);
             return new CategoriaDto {Descripcion = entity.Descripcion };
         }
         
