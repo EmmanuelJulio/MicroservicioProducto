@@ -34,9 +34,8 @@ namespace CapaAccesoDatosProductos.Comandos
         {
             try
             {
-               var obejto= contexto.Set<T>().FirstOrDefault(x => x.Id == id);
-                contexto.Remove<T>(obejto);
-                contexto.SaveChanges();
+              var entidad = contexto.Set<T>().FirstOrDefault(x => x.Id == id);
+                Delete<T>(entidad);
                 return true;
             }
             catch (Exception)
