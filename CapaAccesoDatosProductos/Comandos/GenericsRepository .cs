@@ -34,8 +34,10 @@ namespace CapaAccesoDatosProductos.Comandos
         {
             try
             {
-              var entidad = contexto.Set<T>().FirstOrDefault(x => x.Id == id);
-                Delete<T>(entidad);
+              Producto entidad = contexto.productos.FirstOrDefault(x => x.Id == id);
+                contexto.productos.Remove(entidad);
+                    contexto.SaveChanges();
+                
                 return true;
             }
             catch (Exception)
@@ -43,6 +45,7 @@ namespace CapaAccesoDatosProductos.Comandos
                 return false;
             }
         }
+
 
         public T GetBy<T>(int id) where T : class
         {

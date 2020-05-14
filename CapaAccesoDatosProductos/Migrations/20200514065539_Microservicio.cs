@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CapaAccesoDatosProductos.Migrations
 {
-    public partial class tp2 : Migration
+    public partial class Microservicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,33 +24,33 @@ namespace CapaAccesoDatosProductos.Migrations
                 name: "imagenproducto",
                 columns: table => new
                 {
-                    ImagenproductoID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_imagenproducto", x => x.ImagenproductoID);
+                    table.PrimaryKey("PK_imagenproducto", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "marca",
                 columns: table => new
                 {
-                    MarcaID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_marca", x => x.MarcaID);
+                    table.PrimaryKey("PK_marca", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "precioproducto",
                 columns: table => new
                 {
-                    PrecioproductoID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Precioreal = table.Column<decimal>(nullable: false),
                     Precioventa = table.Column<decimal>(nullable: false),
@@ -58,14 +58,14 @@ namespace CapaAccesoDatosProductos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_precioproducto", x => x.PrecioproductoID);
+                    table.PrimaryKey("PK_precioproducto", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "productos",
                 columns: table => new
                 {
-                    ProductoID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(nullable: true),
                     Descripcion = table.Column<string>(nullable: true),
@@ -74,12 +74,12 @@ namespace CapaAccesoDatosProductos.Migrations
                     CategoriaID = table.Column<int>(nullable: false),
                     MarcaID = table.Column<int>(nullable: false),
                     Stock = table.Column<int>(nullable: false),
-                    ImagenProductoNavigatorImagenproductoID = table.Column<int>(nullable: true),
-                    PrecioProductoNavigatorPrecioproductoID = table.Column<int>(nullable: true)
+                    ImagenProductoNavigatorId = table.Column<int>(nullable: true),
+                    PrecioProductoNavigatorId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_productos", x => x.ProductoID);
+                    table.PrimaryKey("PK_productos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_productos_categorias_CategoriaID",
                         column: x => x.CategoriaID,
@@ -87,22 +87,22 @@ namespace CapaAccesoDatosProductos.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_productos_imagenproducto_ImagenProductoNavigatorImagenproductoID",
-                        column: x => x.ImagenProductoNavigatorImagenproductoID,
+                        name: "FK_productos_imagenproducto_ImagenProductoNavigatorId",
+                        column: x => x.ImagenProductoNavigatorId,
                         principalTable: "imagenproducto",
-                        principalColumn: "ImagenproductoID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_productos_marca_MarcaID",
                         column: x => x.MarcaID,
                         principalTable: "marca",
-                        principalColumn: "MarcaID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_productos_precioproducto_PrecioProductoNavigatorPrecioproductoID",
-                        column: x => x.PrecioProductoNavigatorPrecioproductoID,
+                        name: "FK_productos_precioproducto_PrecioProductoNavigatorId",
+                        column: x => x.PrecioProductoNavigatorId,
                         principalTable: "precioproducto",
-                        principalColumn: "PrecioproductoID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -112,9 +112,9 @@ namespace CapaAccesoDatosProductos.Migrations
                 column: "CategoriaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productos_ImagenProductoNavigatorImagenproductoID",
+                name: "IX_productos_ImagenProductoNavigatorId",
                 table: "productos",
-                column: "ImagenProductoNavigatorImagenproductoID");
+                column: "ImagenProductoNavigatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_productos_MarcaID",
@@ -122,9 +122,9 @@ namespace CapaAccesoDatosProductos.Migrations
                 column: "MarcaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productos_PrecioProductoNavigatorPrecioproductoID",
+                name: "IX_productos_PrecioProductoNavigatorId",
                 table: "productos",
-                column: "PrecioProductoNavigatorPrecioproductoID");
+                column: "PrecioProductoNavigatorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

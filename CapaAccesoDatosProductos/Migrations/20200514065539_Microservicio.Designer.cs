@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapaAccesoDatosProductos.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200514002046_tp2")]
-    partial class tp2
+    [Migration("20200514065539_Microservicio")]
+    partial class Microservicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,7 +38,7 @@ namespace CapaAccesoDatosProductos.Migrations
 
             modelBuilder.Entity("CapaDominioProductos.Entidades.ImagenProducto", b =>
                 {
-                    b.Property<int>("ImagenproductoID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -46,14 +46,14 @@ namespace CapaAccesoDatosProductos.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ImagenproductoID");
+                    b.HasKey("Id");
 
                     b.ToTable("imagenproducto");
                 });
 
             modelBuilder.Entity("CapaDominioProductos.Entidades.Marca", b =>
                 {
-                    b.Property<int>("MarcaID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -61,14 +61,14 @@ namespace CapaAccesoDatosProductos.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MarcaID");
+                    b.HasKey("Id");
 
                     b.ToTable("marca");
                 });
 
             modelBuilder.Entity("CapaDominioProductos.Entidades.PrecioProducto", b =>
                 {
-                    b.Property<int>("PrecioproductoID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -82,14 +82,14 @@ namespace CapaAccesoDatosProductos.Migrations
                     b.Property<decimal>("Precioventa")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("PrecioproductoID");
+                    b.HasKey("Id");
 
                     b.ToTable("precioproducto");
                 });
 
             modelBuilder.Entity("CapaDominioProductos.Entidades.Producto", b =>
                 {
-                    b.Property<int>("ProductoID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -103,7 +103,7 @@ namespace CapaAccesoDatosProductos.Migrations
                     b.Property<int>("ImagenID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ImagenProductoNavigatorImagenproductoID")
+                    b.Property<int?>("ImagenProductoNavigatorId")
                         .HasColumnType("int");
 
                     b.Property<int>("MarcaID")
@@ -115,21 +115,21 @@ namespace CapaAccesoDatosProductos.Migrations
                     b.Property<int>("PrecioID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PrecioProductoNavigatorPrecioproductoID")
+                    b.Property<int?>("PrecioProductoNavigatorId")
                         .HasColumnType("int");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductoID");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoriaID");
 
-                    b.HasIndex("ImagenProductoNavigatorImagenproductoID");
+                    b.HasIndex("ImagenProductoNavigatorId");
 
                     b.HasIndex("MarcaID");
 
-                    b.HasIndex("PrecioProductoNavigatorPrecioproductoID");
+                    b.HasIndex("PrecioProductoNavigatorId");
 
                     b.ToTable("productos");
                 });
@@ -144,7 +144,7 @@ namespace CapaAccesoDatosProductos.Migrations
 
                     b.HasOne("CapaDominioProductos.Entidades.ImagenProducto", "ImagenProductoNavigator")
                         .WithMany()
-                        .HasForeignKey("ImagenProductoNavigatorImagenproductoID");
+                        .HasForeignKey("ImagenProductoNavigatorId");
 
                     b.HasOne("CapaDominioProductos.Entidades.Marca", "MarcaNavigator")
                         .WithMany()
@@ -154,7 +154,7 @@ namespace CapaAccesoDatosProductos.Migrations
 
                     b.HasOne("CapaDominioProductos.Entidades.PrecioProducto", "PrecioProductoNavigator")
                         .WithMany()
-                        .HasForeignKey("PrecioProductoNavigatorPrecioproductoID");
+                        .HasForeignKey("PrecioProductoNavigatorId");
                 });
 #pragma warning restore 612, 618
         }
