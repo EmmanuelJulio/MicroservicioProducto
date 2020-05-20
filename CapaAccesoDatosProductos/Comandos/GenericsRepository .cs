@@ -19,8 +19,17 @@ namespace CapaAccesoDatosProductos.Comandos
 
         public void Agregar<T>(T entity) where T : class
         {
-            contexto.Add(entity);
-            contexto.SaveChanges();
+
+            try
+            {
+                contexto.Add(entity);
+                contexto.SaveChanges();
+            }
+           
+            catch (Exception e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
         }
       
 
@@ -51,6 +60,15 @@ namespace CapaAccesoDatosProductos.Comandos
         {
             DbSet<T> table = contexto.Set<T>();
             return table.Find(id);
+        }
+
+        public T Update<T>(T entity) where T : class
+        {
+            
+           contexto.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+           contexto.SaveChanges();
+            return entity; 
+           
         }
 
         T IGenericsRepository.Agregarr<T>(T entity)

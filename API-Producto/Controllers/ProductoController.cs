@@ -25,15 +25,15 @@ namespace API_Producto.Controllers
         [HttpPost]
         public IActionResult Post(ProductoDto productoDto)
         {
-            try
-            {
+            //try
+            //{
                 return new  JsonResult(servicio.createProducto(productoDto)) { StatusCode = 201};
 
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }        
+            //}
+            //catch (Exception e)
+            //{
+            //    return BadRequest(e.Message);
+            //}        
         }
 
        [Route("FiltroPrecio")]
@@ -75,6 +75,37 @@ namespace API_Producto.Controllers
             try
             {
                 return new JsonResult(servicio.EliminarProducto(id)) { StatusCode = 200 };
+
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+
+            }
+        }
+        [Route("BorrarUnProducto")]
+        [HttpDelete]
+        public IActionResult EliminarProducto(ProductoDto producto)
+        {
+            try
+            {
+                return new JsonResult(servicio.EliminarProducto(producto)) { StatusCode = 200 };
+
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+
+            }
+        }
+
+        [Route("ActualizarProducto")]
+        [HttpPut]
+        public IActionResult UpdateProducto(ProductoDto producto)
+        {
+            try
+            {
+                return new JsonResult(servicio.ActualizarProducto(producto)) { StatusCode = 200 };
 
             }
             catch (System.Exception e)

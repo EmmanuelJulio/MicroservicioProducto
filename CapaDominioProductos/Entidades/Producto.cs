@@ -5,35 +5,24 @@ using System.Text;
 
 namespace CapaDominioProductos.Entidades
 {
-    public class Producto : Entidad
+    public class Producto
     {
 
-        
-        private string nombre;
-        private string descripcion;
-        private int precioID;
-        private int imagenID;
-        private int categoriaID;
-        private int marcaID;
-        private int stock;
+        public int Id { get; set; }
+        public string nombre { get; set; }
+        public string descripcion { get; set; }
+        public int precioID { get; set; }
+        public int imagenID { get; set; }
+        public int categoriaID { get; set; }
+        public int marcaID { get; set; }
+        public int stock { get; set; }
+        public string Marca { get; set; }
 
-       
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
-        public int PrecioID { get => precioID; set => precioID = value; }
-        public int ImagenID { get => imagenID; set => imagenID = value; }
-        public int CategoriaID { get => categoriaID; set => categoriaID = value; }
-
-        public int MarcaID { get => marcaID; set => marcaID = value; }
-
-        public int Stock { get => stock; set => stock = value; }
-
-
+    
         public virtual ImagenProducto ImagenProductoNavigator { get; set; }
         public virtual PrecioProducto PrecioProductoNavigator { get; set; }
         public virtual Categoria CategoriaNavigator { get; set; }
-
-        public virtual Marca MarcaNavigator { get; set; }
+        
        
     }
 }

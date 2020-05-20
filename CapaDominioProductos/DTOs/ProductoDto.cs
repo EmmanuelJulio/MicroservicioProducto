@@ -7,7 +7,7 @@ namespace CapaDominioProductos.DTOs
 {
     public class ProductoDto
     {
-       
+       public int id { get; set; }
         private string nombre;
         private string descripcion;
         private int precioID;

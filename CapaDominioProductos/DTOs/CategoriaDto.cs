@@ -6,8 +6,7 @@ namespace CapaDominioProductos.DTOs
 {
     public class CategoriaDto
     {
-        private string descripcion;
+        public string descripcion { get; set; }
 
-        public string Descripcion { get => descripcion; set => descripcion = value; }
     }
 }

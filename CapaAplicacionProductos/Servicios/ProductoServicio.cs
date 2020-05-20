@@ -13,7 +13,11 @@ namespace CapaAplicacionProductos.Servicios
     {
         Producto createProducto(ProductoDto productoDto);
         List<ProductoDto> BusquedaProducto(int precio);
+        
+        Producto ActualizarProducto(ProductoDto producto);
+        Producto EliminarProducto(ProductoDto producto);
         bool EliminarProducto(int productoID);
+        
         List<ProductoDto> GetAllProducto();
 
     }
@@ -30,6 +34,42 @@ namespace CapaAplicacionProductos.Servicios
             _Query = query;
         }
 
+        public Producto ActualizarProducto(ProductoDto producto)
+        {
+            var entity = new Producto()
+            {
+                Id = producto.id,
+                Nombre = producto.Nombre,
+                Descripcion = producto.Descripcion,
+                PrecioID = producto.PrecioID,
+                ImagenID = producto.ImagenID,
+                CategoriaID = producto.CategoriaID,
+                Stock = producto.Stock,
+                MarcaID = producto.MarcaID
+
+
+            };
+            repository.Update<Producto>(entity);
+            return entity;
+        }
+        public Producto EliminarProducto(ProductoDto producto)
+        {
+            var entity = new Producto()
+            {
+                Id = producto.id,
+                Nombre = producto.Nombre,
+                Descripcion = producto.Descripcion,
+                PrecioID = producto.PrecioID,
+                ImagenID = producto.ImagenID,
+                CategoriaID = producto.CategoriaID,
+                Stock = producto.Stock,
+                MarcaID = producto.MarcaID
+
+
+            };
+            repository.Delete<Producto>(entity);
+            return entity;
+        }
 
         public List<ProductoDto> BusquedaProducto(int precio)
         {
@@ -69,6 +109,11 @@ namespace CapaAplicacionProductos.Servicios
         public List<ProductoDto> GetAllProducto()
         {
             return _Query.GetAllProducto();
+        }
+
+        public Producto BusquedaProductoID(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

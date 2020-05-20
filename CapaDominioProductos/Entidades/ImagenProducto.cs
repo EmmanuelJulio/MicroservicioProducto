@@ -5,12 +5,12 @@ using System.Text;
 
 namespace CapaDominioProductos.Entidades
 {
-    public class ImagenProducto : Entidad
-    {
-       
-        private string nombre;
+    public class ImagenProducto
 
-        
-        public string  Nombre { get => nombre; set => nombre = value; }
+    {
+       public int Id { get; set; }
+        public string nombre { get; set; }
+
+
     }
 }

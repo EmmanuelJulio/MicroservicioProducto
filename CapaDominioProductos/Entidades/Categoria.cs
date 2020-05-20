@@ -5,13 +5,14 @@ using System.Text;
 
 namespace CapaDominioProductos.Entidades
 {
-    public class Categoria : Entidad
+    public class Categoria 
     {
 
      
-        private string descripcion;
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
 
-       
-        public string Descripcion { get => descripcion; set => descripcion = value; }
+
+
     }
 }

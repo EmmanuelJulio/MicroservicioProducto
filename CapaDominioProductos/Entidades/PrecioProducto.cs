@@ -6,18 +6,17 @@ using System.Text;
 
 namespace CapaDominioProductos.Entidades
 {
-    public class PrecioProducto : Entidad
+    public class PrecioProducto 
     {
-       
-        [Column(TypeName = "decimal(18,2)")]
-        private decimal precioreal;
-        private decimal precioventa;
-        private DateTime fecha;
+        public int Id { get; set; }
 
-        
-        public decimal Precioreal { get => precioreal; set => precioreal = value; }
-        public decimal Precioventa { get => precioventa; set => precioventa = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
-     
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal precioreal { get; set; }
+        public decimal precioventa { get; set; }
+        public DateTime fecha { get; set; }
+
+
+
+
     }
 }
